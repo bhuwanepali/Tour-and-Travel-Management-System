@@ -737,12 +737,4 @@ function renderTime(){
 renderTime();
 </script>
 </body>
-<!-- <script>
-    $(function () {
-    $('#myDiv').floatingWhatsApp({
-      phone: '5491133359850'
-    });
-  });
- -->
-</script>
 </html>

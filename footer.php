@@ -20,7 +20,7 @@
             <a href="#">about us</a>
             <a href="#">gallery</a>
             <a href="#">review</a>
-            <a href="#">contact us</a>
+            <a href="#">Contact No. : 9813246534</a>
         </div>
         <div class="box">
             <h3>follow us</h3>
