@@ -3,7 +3,33 @@
     if(isset($_GET['del'])){
         $id=$_GET['del'];
         mysqli_query($con,"DELETE FROM bookings WHERE boo_id = '$id'");
-    }    
+    }
+    
+    if(isset($_GET['return'])){
+        $bid = $_GET['return'];
+        $return = "SELECT * FROM bookings WHERE boo_id = $bid";
+        $refund = mysqli_query($con, $return);
+        if(mysqli_num_rows($refund) > 0){
+            $fetch_data = mysqli_fetch_assoc($refund);
+            $payment = $fetch_data['payment-status'];
+            $email = $fetch_data['u_email'];
+            $boo_id = $fetch_data['boo_id'];    
+            $status = 'refunded';
+            $update_status = "UPDATE bookings SET `payment-status` = '$status' WHERE `boo_id` = $bid";
+            $update_res = mysqli_query($con, $update_status);
+            if($update_res){
+                $_SESSION['username'] = $name;
+                $_SESSION['c_email'] = $email;
+                header("location: refund.php?boo_id=$boo_id");
+                exit();
+            }else{
+                echo "Failed while updating code!";
+            }
+        }else{
+            echo "You've entered incorrect code!";
+        }
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -142,7 +168,10 @@
                         <td><?php echo '$'.$data['total'];?></td>
                         <td><?php echo $data['b_type'];?></td>
                         <td><?php echo $data['payment-status'];?></td>
-                        <td><a href="manage_booking.php?del=<?php echo $data["boo_id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-times-circle"></i></a></td>
+                        <td>
+                            <a href="manage_booking.php?del=<?php echo $data["boo_id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-times-circle"></i></a>&nbsp;&nbsp;
+                            <a href="manage_booking.php?return=<?php echo $data["boo_id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-exchange-alt"></i></a>
+                        </td>
                     </tr>
                 <?php } ?>        
             </tbody>
