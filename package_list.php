@@ -148,7 +148,7 @@
                 <label for="">Location</label>
                 <input type="text" name="location" value="<?php echo $row['place']; ?>" readonly="readonly">
                 <label for="">Number of member</label>
-                <input type="text" class="numberr" onBlur="iTotal()" name="num" id="num0" placeholder="No of member" value="1">
+                <input type="text" class="numberr" onBlur="iTotal()" name="num" id="num0" placeholder="No of member" value="1" readonly required>
                 <label for="">Package Price</label>
                 <input type="text" name="total" value="<?php echo '$'.$row['cost'].' / day'; ?>" readonly="readonly">
                 <label for="">Vehicle</label><br>
@@ -214,7 +214,7 @@
                 <label for="">Location</label>
                 <input type="text" name="location" id=""  value="<?php echo $row['place']; ?>" readonly="readonly">
                 <label for="">Number of member</label>
-                <input type="text" class="numberr" onBlur="findTotal()" name="num" id="num1" placeholder="No of member" value="0">
+                <input type="text" class="numberr" onBlur="findTotal()" name="num" id="num1" placeholder="No of member" value="0" required>
                 <label for="">Package Price</label>
                 <input type="text" name="total" value="<?php echo '$'.$row['cost'].' / day'; ?>" readonly="readonly">
                 <label for="">Vehicle</label><br>
@@ -340,7 +340,7 @@
                 <label for="">Location</label>
                 <input type="text" name="location" value="<?php echo $row['place']; ?>" readonly="readonly">
                 <label for="">Number of member</label>
-                <input type="text" class="numberr" onBlur="cTotal()" name="num" id="num4" placeholder="No of member" value="2">
+                <input type="text" class="numberr" onBlur="cTotal()" name="num" id="num4" placeholder="No of member" value="2" readonly>
                 <label for="">Package Price</label>
                 <input type="text" name="total" value="<?php echo '$'.$row['cost'].' / day'; ?>" readonly="readonly">
                 <label for="">Vehicle</label><br>
