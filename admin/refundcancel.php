@@ -1,12 +1,3 @@
-<?php
-    session_start();
-    include "../db.php";
-    if(isset($_GET['del'])){
-        $id=$_GET['del'];
-        mysqli_query($con,"DELETE FROM bookings WHERE boo_id = '$id'");
-    }    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,12 +14,6 @@
 <body>
 <main id="cart-main">
     <div class="site-title text-center">
-    <?php
-        include "../db.php";
-        $id = $_SESSION['id'];
-        $bsql = "SELECT * FROM `bookings` WHERE cid=$id";
-        $bresult = mysqli_query($con,$bsql);
-        $bdata = mysqli_fetch_array($bresult) ?>                            
         <div><img src="../assets/cancel.png" alt="" style="width:250px; height:250px;"></div>
         <h1 class="font-title">Payment Refund Cancel For Some Reason</h1>
         <a href="manage_booking.php" class="btn-link">Back to Home page</a>

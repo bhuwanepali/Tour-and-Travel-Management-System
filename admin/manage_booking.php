@@ -1,9 +1,9 @@
 <?php
     include "../db.php";
-    if(isset($_GET['del'])){
-        $id=$_GET['del'];
-        mysqli_query($con,"DELETE FROM bookings WHERE boo_id = '$id'");
-    }
+    // if(isset($_GET['del'])){
+    //     $id=$_GET['del'];
+    //     mysqli_query($con,"DELETE FROM bookings WHERE boo_id = '$id'");
+    // }
     
     if(isset($_GET['return'])){
         $bid = $_GET['return'];
@@ -15,7 +15,7 @@
             $email = $fetch_data['u_email'];
             $boo_id = $fetch_data['boo_id'];    
             $status = 'refunded';
-            $update_status = "UPDATE bookings SET `payment-status` = '$status' WHERE `boo_id` = $bid";
+            $update_status = "UPDATE bookings SET `payment-status` = '$status' WHERE `boo_id` = $boo_id";
             $update_res = mysqli_query($con, $update_status);
             if($update_res){
                 $_SESSION['username'] = $name;
@@ -169,8 +169,13 @@
                         <td><?php echo $data['b_type'];?></td>
                         <td><?php echo $data['payment-status'];?></td>
                         <td>
-                            <a href="manage_booking.php?del=<?php echo $data["boo_id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-times-circle"></i></a>&nbsp;&nbsp;
-                            <a href="manage_booking.php?return=<?php echo $data["boo_id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-exchange-alt"></i></a>
+                            <?php
+                            if($data['payment-status'] == 'Cancelled'){?>
+                                <a href="manage_booking.php?return=<?php echo $data["boo_id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-exchange-alt"></i></a>
+                            <!-- <a href="manage_booking.php?del=" onclick="return confirm('Are you sure?');"><i class="fas fa-times-circle"></i></a>&nbsp;&nbsp; -->
+                            <?php }else{
+                                
+                            }?>
                         </td>
                     </tr>
                 <?php } ?>        

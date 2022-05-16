@@ -134,7 +134,7 @@
                         <td><?php echo '$'.$data['total'];?></td>
                         <td><?php echo $data['b_type'];?></td>
                         <td><?php echo $data['payment-status'];?></td>
-                        <td><a href="invoice.php?boo_id=<?php echo $data["boo_id"];?>"><button style="color: #ffffff; background: #34444c; border-radius:3px; padding: 5px; cursor: pointer;">Create invoices</button></a></td>
+                        <td><a href="invoice.php?boo_id=<?php echo $data["boo_id"];?>"><button style="color: #ffffff; background: #34444c; border-radius:3px; padding: 5px; cursor: pointer;"><i class="fas fa-money-check"></i></button></a></td>
                     </tr>
                 <?php } ?>        
             </tbody>

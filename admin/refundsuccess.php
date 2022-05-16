@@ -1,20 +1,3 @@
-<?php
-    session_start();
-    include "../db.php";
-    if(isset($_GET['update'])){
-        $uid = $_GET['update'];
-        $suc = 'refunded';
-        $ssql = "UPDATE `bookings` SET `payment-status`='$suc' WHERE cid='$uid'";
-        $success = mysqli_query($con, $ssql);
-
-        if ($success){
-            echo "<script>window.location.href='index.php'</script>";
-        }
-        else{
-            echo '<script type="text/javascript">alert("failed to update...")</script>';
-        }
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,15 +14,9 @@
 <body>
 <main id="cart-main">
     <div class="site-title text-center">
-        <?php
-        include "../db.php";
-        $id = $_SESSION['id'];
-        $bsql = "SELECT * FROM `bookings` WHERE cid=$id";
-        $bresult = mysqli_query($con,$bsql);
-        $bdata = mysqli_fetch_array($bresult)?>                            
         <div><img src="../assets/checked.png" alt="" style="width:250px; height:250px;"></div>
         <h1 class="font-title">Payment Refunded Successfully...!</h1>
-        <a href="refundsuccess.php?update=<?php echo $bdata["cid"];?>" class="btn-link" name="ok">Back to Home page</a>
+        <a href="manage_booking.php" class="btn-link" name="ok">Back to Home page</a>
     </div>
 </main>
 </body>
