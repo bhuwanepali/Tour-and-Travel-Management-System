@@ -1,14 +1,14 @@
-<?php 
+<?php
 	include "db.php";
 	#Login script is begin here
 	#If user given credential matches successfully with the data available in database then we will echo string login_success
 	#login_success string will go back to called Anonymous funtion $("#login").click() 
+	// $pid = $_GET['q'];
 
 	if(isset($_POST["signin"])){
-        $pid = $_GET['q'];
 		$email = mysqli_real_escape_string($con,$_POST["email"]);
 		$pass =	md5($_POST["password"]);
-		$sql = "SELECT * FROM user_details WHERE `c_email` = '$email' AND `pswd` = '$pass'";
+		$sql = "SELECT * FROM user_details WHERE `c_email` = '$email' OR `username` = '$email' AND `pswd` = '$pass'";
 		$run_query = mysqli_query($con,$sql);
 		$count = mysqli_num_rows($run_query);
 		//we have created a cookie in login_form.php page so if that cookie is available means user is not login
@@ -16,6 +16,9 @@
 	  	//if user record is available in database then $count will be equal to 1
 		if($count == 1){
 			while($row = mysqli_fetch_assoc($run_query)){
+					session_start();
+					// $_SESSION["pid"] = $_GET["q"];
+					$pid = $_SESSION["pid"];
 					$_SESSION["id"] = $row["c_id"];
 					$_SESSION["name"] = $row["username"];
 					$_SESSION["email"] = $row["c_email"];
@@ -59,7 +62,7 @@
         <h1>Login here</h1>
         <form method="post" action="">
             <div class="txt_field">
-                <input type="email" name="email" required>
+                <input type="text" name="email" required>
                 <span></span>
                 <label>Email</label>
             </div>

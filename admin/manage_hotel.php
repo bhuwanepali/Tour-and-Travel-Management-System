@@ -131,11 +131,11 @@
                     {?>
                     <tr>
                         <td><?php echo $data['id'];?></td>
-                        <td><?php echo $data['rname'];?></td>
-                        <td><?php echo "<img src='../images/".$data['rphoto']."'>";?></td>
-                        <td>$<?php echo $data["rprice"];?></td>
-                        <td><?php echo $data['rdesc'];?></td>
-                        <td><?php echo $data['rloc'];?></td>
+                        <td><?php echo $data['h_name'];?></td>
+                        <td><?php echo "<img src='../images/".$data['h_photo']."'>";?></td>
+                        <td>$<?php echo $data["h_price"];?></td>
+                        <td><?php echo $data['h_desc'];?></td>
+                        <td><?php echo $data['h_ploc'];?></td>
                         <td><a href="edit_hotel.php?id=<?php echo $data["id"];?>"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="manage_hotel.php?del=<?php echo $data["id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-times-circle"></i></a></td>
                     </tr>

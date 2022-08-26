@@ -170,7 +170,7 @@
                         <td><?php echo $data['payment-status'];?></td>
                         <td>
                             <?php
-                            if($data['payment-status'] == 'Cancelled'){?>
+                            if($data['b_status'] == 'Cancelled'){?>
                                 <a href="manage_booking.php?return=<?php echo $data["boo_id"];?>" onclick="return confirm('Are you sure?');"><i class="fas fa-exchange-alt"></i></a>
                             <!-- <a href="manage_booking.php?del=" onclick="return confirm('Are you sure?');"><i class="fas fa-times-circle"></i></a>&nbsp;&nbsp; -->
                             <?php }else{

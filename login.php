@@ -7,7 +7,7 @@
 	if(isset($_POST["signin"])){
 		$email = mysqli_real_escape_string($con,$_POST["email"]);
 		$pass =	md5($_POST["password"]);
-		$sql = "SELECT * FROM user_details WHERE `c_email` = '$email' AND `pswd` = '$pass'";
+		$sql = "SELECT * FROM user_details WHERE `c_email` = '$email' OR `username` = '$email' AND `pswd` = '$pass'";
 		$run_query = mysqli_query($con,$sql);
 		$count = mysqli_num_rows($run_query);
 		//we have created a cookie in login_form.php page so if that cookie is available means user is not login
@@ -58,7 +58,7 @@
         <h1>Login here</h1>
         <form method="post" action="">
             <div class="txt_field">
-                <input type="email" name="email" required>
+                <input type="text" name="email" required>
                 <span></span>
                 <label>Email</label>
             </div>

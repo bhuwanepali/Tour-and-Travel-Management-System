@@ -17,55 +17,60 @@
 		$address = $_POST["addr"];
 		$city = $_POST["city"];
 		$name = "/^[a-zA-Z ]+$/";
-		$emailValidation = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$/";
+		// $emailValidation = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9]+(\.[a-z]{2,4})$/";
 		$number = "/^[0-9]+$/";
         move_uploaded_file($_FILES['Image']['tmp_name'], $target);
 
 	if(empty($f_name) || empty($l_name) || empty($email) || empty($pass) || empty($repass) ||
 		empty($mobile) || empty($address) || empty($city)){
 			echo "<script>alert('PLease Fill all fields..!')</script>";
-			echo "<script> location.href='package_list.php'; </script>";
+			echo "<script> location.href='package_list.php?q=$pid'; </script>";
 			exit();
 	} 
 	else {
 		if(!preg_match($name,$f_name)){
 		echo "<script>alert('this $f_name is not valid..!')</script>";
-		echo "<script> location.href='package_list.php'; </script>";
+		echo "<script> location.href='package_list.php?q=$pid'; </script>";
 		exit();
 		}
 		if(!preg_match($name,$l_name)){
 			echo "<script>alert('this $l_name is not valid..!')</script>";
-			echo "<script> location.href='package_list.php'; </script>";
+			echo "<script> location.href='package_list.php?q=$pid'; </script>";
 			exit();
 		}
-		if(!preg_match($emailValidation,$email)){
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL) == true){
 			echo "<script>alert('this $email is not valid..!')</script>";
-			echo "<script> location.href='package_list.php'; </script>";
+			echo "<script> location.href='package_list.php?q=$pid'; </script>";
 			exit();
 		}
+		// if(!preg_match($emailValidation,$email)){
+		// 	echo "<script>alert('this $email is not valid..!')</script>";
+		// 	echo "<script> location.href='package_list.php?q=$pid'; </script>";
+		// 	exit();
+		// }
 		// if(strlen($password) < 8 ){
 		// 	echo "<script>alert('Password is weak')</script>";
-		// 	echo "<script> location.href='package_list.php'; </script>";
+		// 	echo "<script> location.href='package_list.php?q=$pid'; </script>";
 		// 	exit();
 		// }
 		// if(strlen($repassword) < 8 ){
 		// 	echo "<script>alert('Password is weak')</script>";
-		// 	echo "<script> location.href='package_list.php'; </script>";
+		// 	echo "<script> location.href='package_list.php?q=$pid'; </script>";
 		// 	exit();
 		// }
 		// if($pass != $repass){
 		// 	echo "<script>alert('password is not same')</script>";
-		// 	echo "<script> location.href='package_list.php'; </script>";
+		// 	echo "<script> location.href='package_list.php?q=$pid'; </script>";
 		// 	exit();
 		// }
 		if(!preg_match($number,$mobile)){
 			echo "<script>alert('Mobile number $mobile is not valid')</script>";
-			echo "<script> location.href='package_list.php'; </script>";
+			echo "<script> location.href='package_list.php?q=$pid'; </script>";
 			exit();
 		}
 		if(!(strlen($mobile) == 10)){
 			echo "<script>alert('Mobile number must be 10 digit')</script>";
-			echo "<script> location.href='package_list.php'; </script>";
+			echo "<script> location.href='package_list.php?q=$pid'; </script>";
 			exit();
 		}
 		//existing email address in our database
@@ -74,20 +79,44 @@
 		$count_email = mysqli_num_rows($check_query);
 		if($count_email > 0){
 			echo "<script>alert('Email Address is already available Try Another email address')</script>";
-			echo "<script> location.href='package_list.php'; </script>";
+			echo "<script> location.href='package_list.php?q=$pid'; </script>";
 			exit();
 		} 
 		else {
-
-			$sql = "INSERT INTO `user_details`(`username`, `c_email`, `pswd`, `c_address`, `c_mobile`, `c_photo`, `fname`, `lname`, `city`, `c_pswd`) 
-                    VALUES ('$u_name','$email','$pass','$address','$mobile','$image','$f_name','$l_name','$city','$repass')";
+			$otp = rand(999999, 111111);
+            $status = "notverified";
+			$sql = "INSERT INTO `user_details`(`username`, `c_email`, `pswd`, `c_address`, `c_mobile`, `c_photo`, `fname`, `lname`, `city`, `c_pswd`,`otp_code`,`u_status`) 
+                    VALUES ('$u_name','$email','$pass','$address','$mobile','$image','$f_name','$l_name','$city','$repass','$otp','$status')";
 
 			$run_query = mysqli_query($con,$sql);
 			if($run_query){
-				echo "<script>alert('Register success...!')</script>";
-				echo "<script> location.href='package_list.php'; </script>";
-	            exit;
-			}
+
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";    
+                $headers .= "From: bhuwan.pariyar@acme.edu.np";
+                $subject = "Booking Verification Code";
+                $message = "Your verification code is $otp. <br> Click <a href='localhost/tms/r_otp.php?code=$otp'>here</a> to visit the site";
+                // print_r($message);
+                if(mail($email, $subject, $message, $headers)){
+                    $info = "We've sent a verification code to your email - $email";
+                    $_SESSION['info'] = $info;
+                    // $_SESSION['c_email'] = $email;
+                    // $_SESSION['pswd'] = $password;
+                    header("location: r_otp.php");
+                    exit();
+                }
+                else{
+                    echo "Failed while sending code!";
+                }
+            }else{
+                echo "Failed while inserting data into database!";
+            }
+
+			// if($run_query){
+			// 	echo "<script>alert('Register success...!')</script>";
+			// 	echo "<script> location.href='package_list.php?q=$pid'; </script>";
+	        //     exit;
+			// }
 		}
 	}
 	}
@@ -98,7 +127,7 @@
     </div>
 	<div class="reg_center">
 	    <h1>Register here</h1>
-	    <form name="form" method="post" action="register.php" enctype="multipart/form-data" id="uploadForm">
+	    <form name="form" method="post" action="registerp.php" enctype="multipart/form-data" id="uploadForm">
 			<div class="pro-image">
 				<img src="images/img.jpg" alt="" onclick="triggerClick()" id="imagedisplay">
 				<input type="file" name="Image" id="file" onchange="filePreview(this)" style="display: none;" required>

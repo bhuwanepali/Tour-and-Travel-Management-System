@@ -99,10 +99,10 @@
         </div>
         <div id="clockDisplay" class="clock" style="color:#30637c;"></div>
         <div class="icons">
-            <a href="#" id="facebook" class="fab fa-facebook-f"></a>
-            <a href="#" id="twitter" class="fab fa-twitter"></a>
-            <a href="#" id="instagram" class="fab fa-instagram"></a>
-            <a href="#" id="linkedin" class="fab fa-linkedin"></a>
+            <a href="https://www.facebook.com/profile.php?id=100084376884162" id="facebook" class="fab fa-facebook-f"></a>
+            <a href="https://twitter.com/ttmsagency" id="twitter" class="fab fa-twitter"></a>
+            <a href="https://www.instagram.com/ttmsagency/" id="instagram" class="fab fa-instagram"></a>
+            <a href="https://www.linkedin.com/in/ttmsagency/" id="linkedin" class="fab fa-linkedin"></a>
         </div>
     </main>
 </header>
@@ -622,10 +622,10 @@
         </div>
         <div class="box">
             <h3>Follow us</h3>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">Twitter</a>
-            <a href="#">Linkedin</a>
+            <a href="https://www.facebook.com/profile.php?id=100084376884162">Facebook</a>
+            <a href="https://www.instagram.com/ttmsagency/">Instagram</a>
+            <a href="https://twitter.com/ttmsagency">Twitter</a>
+            <a href="https://www.linkedin.com/in/ttmsagency/">Linkedin</a>
         </div>
     </div>
     <h1 class="credit">

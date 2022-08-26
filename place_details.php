@@ -149,7 +149,7 @@
                               while($row = mysqli_fetch_array($query_run)){?>
                                 <p class="paragraph"><?php echo $row['pdesc']; ?></p>
                                 <div class="booking">
-                                  <a href="package_list.php?q=<?php echo $row['p_id']; ?>" id="button" class="modal-btn">Book the place</a>
+                                  <a href="package_list.php?q=<?php echo $row['p_id']; ?>" id="button" class="modal-btn">Book This place</a>
                                 </div>
                             <?php
                               }

@@ -168,27 +168,3 @@ function menuToggle(){
     
     // window.onscroll = calcScrollValue;
     // window.onload = calcScrollValue;
-
-    // <div class="box">
-    //     <div class="card-container">
-    //         <?php 
-    //             include "db.php";
-    //             $res = mysqli_query($con,"SELECT * FROM transportation");
-    //             while($row = mysqli_fetch_array($res)){ ?>
-    //         <div class="pcontainer" data-target="">
-    //             <div class="card">
-    //                 <?php echo "<img src='images/".$row['tphoto']."'>";?>
-    //             </div>
-    //             <div class="info">
-    //                 <div class="span">
-    //                     <div class="label"><?php echo $row['tname']; ?></div>
-    //                 </div>
-    //                 <div class="btn">
-    //                     <a href="">View</a>
-    //                     <!-- <a href="place_details.php?p=<?php echo $row['pname']; ?>">View</a> -->
-    //                 </div>
-    //             </div>
-    //         </div>
-    //         <?php } ?>
-    //     </div>
-    // </div>
